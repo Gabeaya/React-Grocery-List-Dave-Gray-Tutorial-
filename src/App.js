@@ -23,6 +23,8 @@ function App() {
     }
   ]);
 
+  const [newItem, setNewItem] = useState('');
+
   // set a variable each to a functin that maps through the items, for the item that matches the id as the item that was clicked, we will make a Copy, using the spreadoperator= ...item, of the said item and alter its checked property.
   const handleCheck = (id) => {
     const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked} : item);
@@ -38,10 +40,20 @@ function App() {
 
   }
 
+  const handleSubmit = (e) => {
+    console.log('submit it')
+    
+  }
+
   return (
     <div className="App">
       <Header title="Groceries" />
-      <AddItem />
+      <AddItem 
+        newItem={newItem}
+        setNewItem={setNewItem}
+        handleSubmit={handleSubmit}
+      />
+
       <Content 
       items={items}
       handleCheck={handleCheck}
