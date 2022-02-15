@@ -5,7 +5,7 @@ const Footer = ({length}) => {
   return (
     <footer> 
       <p>
-        {length} List {length === 1 ? 'Item' : 'Items'} | Copyright &copy; {today.getFullYear()}
+        {length === 0 ? 'No' : length} List {length === 1 ? 'Item' : 'Items'} | Copyright &copy; {today.getFullYear()}
       </p>
     </footer>
   )
