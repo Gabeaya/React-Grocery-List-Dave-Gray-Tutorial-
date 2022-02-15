@@ -14,7 +14,6 @@ const Content = ({ items, handleCheck, handleDelete}) => {
       ) : (
         <p style={{marginTop: '2emf'}}>Your list is empty.</p>
       )}
-      
     </main>
   )
 }
