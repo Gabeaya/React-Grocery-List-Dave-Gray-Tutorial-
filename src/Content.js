@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { FaTrashAlt } from 'react-icons/fa';
 
-const Content = () => {
+const Content = ({ items, handleCheck, handleDelete}) => {
   
   
   return (
