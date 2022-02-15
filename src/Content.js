@@ -5,7 +5,7 @@ const Content = () => {
   const [items, setItems] = useState([
     {
       id: 1,
-      checked: false,
+      checked: true,
       item: "A turtle"
     },
     {
@@ -18,7 +18,14 @@ const Content = () => {
       checked: false,
       item: "toilet"
     }
-  ])
+  ]);
+  // set a variable each to a functin that maps through the items, for the item that matches the id as the item that was clicked, we will make a Copy, using the spreadoperator= ...item, of the said item and alter its checked property.
+  const handleCheck = (id) => {
+    const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked} : item);
+    setItems(listItems);
+    localStorage.setItem('shoppinglist', JSON.stringify(listItems));
+    // local storage will store all list items in a collection called shopping list
+  }
   return (
     <main>
       <ul>
@@ -26,8 +33,11 @@ const Content = () => {
           <li className='item' key={item.id}>
             <input
             type="checkbox"
+            onChange={() => handleCheck(item.id)}
             checked={item.checked}/>
-            <lable>{item.item}</lable>
+            <label
+              onDoubleClick={() => handleCheck(item.id)}
+            >{item.item}</label>
             <FaTrashAlt role="button" tabIndex="0"/>
           </li>
         ))}
