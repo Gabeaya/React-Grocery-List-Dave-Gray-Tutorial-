@@ -1,8 +1,8 @@
 import  {Header}  from "./Header";
 import Content from "./Content";
 import Footer from "./Footer";
-import {useState} from react;
-import react from "react";
+import {useState} from 'react';
+
 function App() {
   const [items, setItems] = useState([
     {
@@ -45,7 +45,8 @@ function App() {
       handleCheck={handleCheck}
       handleDelete={handleDelete}
       />
-      <Footer />
+      <Footer length={items.length}
+      />
     </div>
   );
 }
