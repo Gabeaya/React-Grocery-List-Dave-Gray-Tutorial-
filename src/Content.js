@@ -3,20 +3,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 const Content = () => {
   
-  // set a variable each to a functin that maps through the items, for the item that matches the id as the item that was clicked, we will make a Copy, using the spreadoperator= ...item, of the said item and alter its checked property.
-  const handleCheck = (id) => {
-    const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked} : item);
-    setItems(listItems);
-    localStorage.setItem('shoppinglist', JSON.stringify(listItems));
-    // local storage will store all list items in a collection called shopping list
-  }
-  const handleDelete = (id) => {
-    // this creates a new array with all items except the selected id item
-    const listItems = items.filter((item) => item.id !== id);
-    setItems(listItems);
-    localStorage.setItem('shoppinglist', JSON.stringify(listItems));
-
-  }
+  
   return (
     <main>
       {items.length ? (
