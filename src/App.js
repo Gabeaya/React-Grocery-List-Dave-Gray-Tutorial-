@@ -55,6 +55,7 @@ function App() {
     console.log('submit it')
     if (!newItem) return;
     // line 47 resets the input value so it wont stay there after submission
+    addItem(newItem);
     setNewItem('');
     event.preventDefault();
   }
