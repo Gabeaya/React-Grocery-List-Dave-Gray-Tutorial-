@@ -2,23 +2,7 @@ import React, {useState} from 'react'
 import { FaTrashAlt } from 'react-icons/fa';
 
 const Content = () => {
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      checked: true,
-      item: "A turtle"
-    },
-    {
-      id: 2,
-      checked: false,
-      item: "toilet paper"
-    },
-    {
-      id: 3,
-      checked: false,
-      item: "toilet"
-    }
-  ]);
+  
   // set a variable each to a functin that maps through the items, for the item that matches the id as the item that was clicked, we will make a Copy, using the spreadoperator= ...item, of the said item and alter its checked property.
   const handleCheck = (id) => {
     const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked} : item);
