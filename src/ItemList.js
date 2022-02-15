@@ -6,6 +6,8 @@ const ItemList = ({items, handleCheck, handleDelete}) => {
     <ul>
         {items.map((item) => (
           <LineItem
+          // line ten removes the error that each child needs a key
+            key={item.id}
             item={item}
             handleCheck={handleCheck}
             handleDelete={handleDelete}
