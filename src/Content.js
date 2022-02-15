@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-
+import { FaTrashAlt } from 'react-icons/fa';
 
 const Content = () => {
   const [items, setItems] = useState([
@@ -28,7 +28,7 @@ const Content = () => {
             type="checkbox"
             checked={item.checked}/>
             <lable>{item.item}</lable>
-            <button>Delete</button>
+            <FaTrashAlt role="button" tabIndex="0"/>
           </li>
         ))}
       </ul>
