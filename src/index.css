@@ -24,7 +24,9 @@ main {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  justify-content: center;
+  /* below makes the items list at the top of the page */
+  justify-content: flex-start; 
+  
   align-items: center;
   overflow-y: auto;
 }
