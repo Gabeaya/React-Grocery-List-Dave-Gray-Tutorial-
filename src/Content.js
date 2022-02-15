@@ -26,8 +26,16 @@ const Content = () => {
     localStorage.setItem('shoppinglist', JSON.stringify(listItems));
     // local storage will store all list items in a collection called shopping list
   }
+  const handleDelete = (id) => {
+    // this creates a new array with all items except the selected id item
+    const listItems = items.filter((item) => item.id !== id);
+    setItems(listItems);
+    localStorage.setItem('shoppinglist', JSON.stringify(listItems));
+
+  }
   return (
     <main>
+
       <ul>
         {items.map((item) => (
           <li className='item' key={item.id}>
@@ -39,7 +47,9 @@ const Content = () => {
             style={(item.checked) ? { textDecoration: 'line-through'} : null}
               onDoubleClick={() => handleCheck(item.id)}
             >{item.item}</label>
-            <FaTrashAlt role="button" tabIndex="0"/>
+            <FaTrashAlt 
+              onClick={() => handleDelete(item.id)}
+              role="button" tabIndex="0"/>
           </li>
         ))}
       </ul>
