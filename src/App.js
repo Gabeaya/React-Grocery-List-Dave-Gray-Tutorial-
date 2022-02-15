@@ -5,23 +5,8 @@ import Footer from "./Footer";
 import {useState} from 'react';
 
 function App() {
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      checked: true,
-      item: "A turtle"
-    },
-    {
-      id: 2,
-      checked: false,
-      item: "toilet paper"
-    },
-    {
-      id: 3,
-      checked: false,
-      item: "toilet"
-    }
-  ]);
+  const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppinglist')));
+    
 
   const [newItem, setNewItem] = useState('');
   
@@ -57,7 +42,7 @@ function App() {
     // line 47 resets the input value so it wont stay there after submission
     addItem(newItem);
     setNewItem('');
-    event.preventDefault();
+    e.preventDefault();
   }
 
   return (
