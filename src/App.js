@@ -4,6 +4,7 @@ import AddItem from './AddItem';
 import Content from "./Content";
 import Footer from "./Footer";
 import {useState, useEffect} from 'react';
+import apiRequest from "./apiRequest";
 
 function App() {
 
@@ -38,12 +39,20 @@ function App() {
     }, 2000)
   },[])//anything passed into the second array tells use effect to trigger when that state is changed 
 
-  const addItem = (item) => {
+  const addItem = async (item) => {
     // this ternary statement sets the id value for the item.
     const id = items.length ? items[items.length -  1].id + 1 : 1;
     const myNewItem = { id, checked: false, item};
     const listItems = [...items, myNewItem];
     setItems(listItems);
+    const postOptions = {
+      method: 'POST ',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(myNewItem)
+    }
+    const result = await apiRequest(API_URL)
   }
 
   // set a variable each to a functin that maps through the items, for the item that matches the id as the item that was clicked, we will make a Copy, using the spreadoperator= ...item, of the said item and alter its checked property.
