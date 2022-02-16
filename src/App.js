@@ -37,7 +37,6 @@ function App() {
     setTimeout(() => {
       (async () => await fetchItems())();
     }, 2000)
-    (async () => await fetchItems())();
   },[])//anything passed into the second array tells use effect to trigger when that state is changed 
 
   const addItem = (item) => {
@@ -84,6 +83,7 @@ function App() {
         setSearch={setSearch}
       />
       <main>
+        {isLoading && <p>Loading Items...</p>}
         {fetchError && <p style={{ color: 'red'}}>{`Error: ${fetchError}`}</p>}
 
         {!fetchError &&<Content 
