@@ -6,7 +6,7 @@ import Footer from "./Footer";
 import {useState, useEffect} from 'react';
 
 function App() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppinglist')) || []);//this empty array is the default state for search queries... we need it if we have a search operator
     
 
   const [newItem, setNewItem] = useState('');
@@ -15,31 +15,27 @@ function App() {
 
   //everytime the component renders useEffect is triggered.
   useEffect(() => {
-    setItems(JSON.parse(localStorage.getItem('shoppinglist')))
+    localStorage.setItem('shoppinglist', JSON.stringify(items));
   },[items])//anything passed into the second array tells use effect to trigger when that state is changed 
-  const setAndSaveItems = (newItems) => {
-    setItems(newItems);
-    // local storage will store all list items in a collection called shopping list
-    localStorage.setItem('shoppinglist', JSON.stringify(newItems));
 
-  }
   const addItem = (item) => {
     // this ternary statement sets the id value for the item.
     const id = items.length ? items[items.length -  1].id + 1 : 1;
     const myNewItem = { id, checked: false, item};
     const listItems = [...items, myNewItem];
-    setAndSaveItems(listItems);
-
+    setItems(listItems);
   }
+
   // set a variable each to a functin that maps through the items, for the item that matches the id as the item that was clicked, we will make a Copy, using the spreadoperator= ...item, of the said item and alter its checked property.
   const handleCheck = (id) => {
     const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked} : item);
-    setAndSaveItems(listItems);
+    setItems(listItems);
   }
+
   const handleDelete = (id) => {
     // this creates a new array with all items except the selected id item
     const listItems = items.filter((item) => item.id !== id);
-    setAndSaveItems(listItems);
+    setItems(listItems);
   }
 
   const handleSubmit = (e) => {
