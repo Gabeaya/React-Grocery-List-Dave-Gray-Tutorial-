@@ -16,6 +16,8 @@ function App() {
 
   const [fetchError, setFetchError] = useState(null);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   //everytime the component renders useEffect is triggered.
   useEffect(() => {
     const fetchItems = async () => {
@@ -28,9 +30,13 @@ function App() {
         setFetchError(null);
       } catch (err) {
         setFetchError(err.message);
+      } finally {
+        setIsLoading(false);
       }
     }
-
+    setTimeout(() => {
+      (async () => await fetchItems())();
+    }, 2000)
     (async () => await fetchItems())();
   },[])//anything passed into the second array tells use effect to trigger when that state is changed 
 
@@ -79,11 +85,12 @@ function App() {
       />
       <main>
         {fetchError && <p style={{ color: 'red'}}>{`Error: ${fetchError}`}</p>}
-        <Content 
+
+        {!fetchError &&<Content 
           items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLocaleLowerCase()))}
           handleCheck={handleCheck}
           handleDelete={handleDelete}
-        />
+        />}
       </main>
 
       <Footer length={items.length}
