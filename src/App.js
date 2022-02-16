@@ -25,7 +25,6 @@ function App() {
         const response = await fetch(API_URL);
         if(!response.ok) throw Error('Did not recieve expected data');
         const listItems = await response.json();
-        console.log(listItems);
         setItems(listItems);
         setFetchError(null);
       } catch (err) {
@@ -86,7 +85,7 @@ function App() {
         {isLoading && <p>Loading Items...</p>}
         {fetchError && <p style={{ color: 'red'}}>{`Error: ${fetchError}`}</p>}
 
-        {!fetchError &&<Content 
+        {!fetchError && !isLoading &&<Content 
           items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLocaleLowerCase()))}
           handleCheck={handleCheck}
           handleDelete={handleDelete}
