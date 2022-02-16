@@ -25,8 +25,9 @@ function App() {
         const listItems = await response.json();
         console.log(listItems);
         setItems(listItems);
+        setFetchError(null);
       } catch (err) {
-        console.log(err.stack)
+        setFetchError(err.message);
       }
     }
 
@@ -76,12 +77,15 @@ function App() {
         search={search}
         setSearch={setSearch}
       />
+      <main>
+        {fetchError && <p style={{ color: 'red'}}>{`Error: ${fetchError}`}</p>}
+        <Content 
+          items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLocaleLowerCase()))}
+          handleCheck={handleCheck}
+          handleDelete={handleDelete}
+        />
+      </main>
 
-      <Content 
-      items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLocaleLowerCase()))}
-      handleCheck={handleCheck}
-      handleDelete={handleDelete}
-      />
       <Footer length={items.length}
       />
     </div>

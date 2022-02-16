@@ -1,10 +1,11 @@
+import React from 'react';
 import ItemList from './ItemList';
 
 const Content = ({ items, handleCheck, handleDelete}) => {
   
   
   return (
-    <main>
+    <React.Fragment>
       {items.length ? (
         <ItemList
           items={items}
@@ -14,7 +15,7 @@ const Content = ({ items, handleCheck, handleDelete}) => {
       ) : (
         <p style={{marginTop: '2emf'}}>Your list is empty.</p>
       )}
-    </main>
+    </React.Fragment>
   )
 }
 
