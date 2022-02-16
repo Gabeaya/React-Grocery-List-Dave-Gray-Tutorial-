@@ -46,13 +46,14 @@ function App() {
     const listItems = [...items, myNewItem];
     setItems(listItems);
     const postOptions = {
-      method: 'POST ',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(myNewItem)
     }
-    const result = await apiRequest(API_URL)
+    const result = await apiRequest(API_URL, postOptions);
+      if (result) setFetchError(result);
   }
 
   // set a variable each to a functin that maps through the items, for the item that matches the id as the item that was clicked, we will make a Copy, using the spreadoperator= ...item, of the said item and alter its checked property.
