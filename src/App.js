@@ -6,17 +6,32 @@ import Footer from "./Footer";
 import {useState, useEffect} from 'react';
 
 function App() {
-  const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppinglist')) || []);//this empty array is the default state for search queries... we need it if we have a search operator
-    
+
+  const API_URL = "http://localhost:3500/items";
+
+  const [items, setItems] = useState([]);//this empty array is the default state for search queries... we need it if we have a search operator
 
   const [newItem, setNewItem] = useState('');
   const [search, setSearch] = useState('');
 
+  const [fetchError, setFetchError] = useState(null);
 
   //everytime the component renders useEffect is triggered.
   useEffect(() => {
-    localStorage.setItem('shoppinglist', JSON.stringify(items));
-  },[items])//anything passed into the second array tells use effect to trigger when that state is changed 
+    const fetchItems = async () => {
+      try {
+        const response = await fetch(API_URL);
+        if(!response.ok) throw Error('Did not recieve expected data');
+        const listItems = await response.json();
+        console.log(listItems);
+        setItems(listItems);
+      } catch (err) {
+        console.log(err.stack)
+      }
+    }
+
+    (async () => await fetchItems())();
+  },[])//anything passed into the second array tells use effect to trigger when that state is changed 
 
   const addItem = (item) => {
     // this ternary statement sets the id value for the item.
