@@ -3,15 +3,20 @@ import SearchItem from "./SearchItem";
 import AddItem from './AddItem';
 import Content from "./Content";
 import Footer from "./Footer";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 function App() {
-  const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppinglist')));
+  const [items, setItems] = useState([]);
     
 
   const [newItem, setNewItem] = useState('');
   const [search, setSearch] = useState('');
 
+
+  //everytime the component renders useEffect is triggered.
+  useEffect(() => {
+    setItems(JSON.parse(localStorage.getItem('shoppinglist')))
+  },[items])//anything passed into the second array tells use effect to trigger when that state is changed 
   const setAndSaveItems = (newItems) => {
     setItems(newItems);
     // local storage will store all list items in a collection called shopping list
