@@ -1,7 +1,9 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+## How to launch the app
+* Run Json server: npx -p 3500 -w data/db.json
+* Run the app: Npm run build
 ## Available Scripts
 
 In the project directory, you can run:
